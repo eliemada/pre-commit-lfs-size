@@ -1,38 +1,56 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    ":dependencyDashboard"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    ':dependencyDashboard',
   ],
-  "commitMessagePrefix": ":arrow_up: ",
-  "labels": ["dependencies"],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["before 3am on Monday"]
+  commitMessagePrefix: ':arrow_up: ',
+  labels: [
+    'dependencies',
+  ],
+  lockFileMaintenance: {
+    enabled: true,
+    schedule: [
+      'before 3am on Monday',
+    ],
   },
-  "packageRules": [
+  packageRules: [
     {
-      "groupName": "🔍 Linting & testing tools",
-      "matchPackagePatterns": ["^ruff", "^pytest", "^pytest-cov"],
-      "automerge": true,
-      "automergeType": "pr"
+      matchCategories: [
+        'python',
+      ],
+      registryUrls: [
+        'https://pypi.org/simple',
+      ],
     },
     {
-      "groupName": "🚨 Major version updates",
-      "matchUpdateTypes": ["major"],
-      "dependencyDashboardApproval": true
+      groupName: '🔍 Linting & testing tools',
+      automerge: true,
+      automergeType: 'pr',
+      matchPackageNames: [
+        '/^ruff/',
+        '/^pytest/',
+        '/^pytest-cov/',
+      ],
     },
     {
-      "groupName": "📦 Build system",
-      "matchPackagePatterns": ["^setuptools", "^wheel"],
-      "automerge": true,
-      "automergeType": "pr"
-    }
+      groupName: '🚨 Major version updates',
+      matchUpdateTypes: [
+        'major',
+      ],
+      dependencyDashboardApproval: true,
+    },
+    {
+      groupName: '📦 Build system',
+      automerge: true,
+      automergeType: 'pr',
+      matchPackageNames: [
+        '/^setuptools/',
+        '/^wheel/',
+      ],
+    },
   ],
-  "python": {
-    "registryUrls": ["https://pypi.org/simple"]
-  },
-  "prConcurrentLimit": 3,
-  "prHourlyLimit": 0,
-  "timezone": "Europe/Zurich"
+  prConcurrentLimit: 3,
+  prHourlyLimit: 0,
+  timezone: 'Europe/Zurich',
 }
