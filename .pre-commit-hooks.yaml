@@ -1,0 +1,7 @@
+- id: check-lfs-size
+  name: Check Git LFS file sizes
+  entry: check_lfs_size.py
+  language: python
+  pass_filenames: false
+  description: "Reject commit if added Git LFS files exceed a size limit."
+  stages: [pre-commit, pre-push, manual]

@@ -1,0 +1,124 @@
+[project]
+name = "pre-commit-lfs-size"
+version = "0.1.0"
+description = "Pre-commit hook to check Git LFS file sizes before commit"
+readme = "README.md"
+authors = [{ name = "Elie Bruno" }]
+license = { text = "MIT" }
+keywords = ["pre-commit", "git-lfs", "lfs", "file-size", "git-hooks"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Version Control :: Git",
+]
+requires-python = ">=3.9"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/eliemada/pre-commit-lfs-size"
+Issues = "https://github.com/eliemada/pre-commit-lfs-size/issues"
+Repository = "https://github.com/eliemada/pre-commit-lfs-size"
+
+[project.scripts]
+check-lfs-size = "check_lfs_size:main"
+
+[tool.setuptools]
+py-modules = ["check_lfs_size"]
+
+[dependency-groups]
+dev = [
+    "pyrefly>=0.37.0",
+    "ruff>=0.14.1",
+    "pytest>=8.0.0",
+    "pytest-cov>=6.0.0",
+]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "grading_tests",
+    "helpers.py"
+]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.9
+target-version = "py39"
+
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D203",    # one-blank-line-before-class (conflicts with D211)
+    "D213",    # multi-line-summary-second-line (conflicts with D212)
+    "COM812",  # missing-trailing-comma (conflicts with formatter)
+    "TRY300",  # try-consider-else
+]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "D100", "D103",  # Missing docstrings
+    "S101",          # Use of `assert`
+    "PLR2004",       # Magic numbers
+    "INP001",        # Implicit namespace package
+    "ANN001",        # Missing type annotations for function arguments (mocks)
+    "ANN201",        # Missing return type annotations
+]
+"check_lfs_size.py" = [
+    "T201",          # Print statements allowed for user output
+]
+
+[tool.pyrefly]
+project-includes = ["check_lfs_size.py"]
+project-excludes = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/*venv/**/*",
+]
+
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
