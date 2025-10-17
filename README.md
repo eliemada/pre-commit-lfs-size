@@ -36,6 +36,8 @@ Then install the hook:
 pre-commit install
 ```
 
+> **Tip**: Consider using [prek](https://github.com/j178/prek) instead of `pre-commit` for a faster, more efficient git hooks manager written in Rust.
+
 ### Manual Installation
 
 1. Clone this repository or download `check_lfs_size.py`
