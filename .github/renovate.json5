@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard"
+  ],
+  "commitMessagePrefix": ":arrow_up: ",
+  "labels": ["dependencies"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 3am on Monday"]
+  },
+  "packageRules": [
+    {
+      "groupName": "🔍 Linting & testing tools",
+      "matchPackagePatterns": ["^ruff", "^pytest", "^pytest-cov"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "groupName": "🚨 Major version updates",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "groupName": "📦 Build system",
+      "matchPackagePatterns": ["^setuptools", "^wheel"],
+      "automerge": true,
+      "automergeType": "pr"
+    }
+  ],
+  "python": {
+    "registryUrls": ["https://pypi.org/simple"]
+  },
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 0,
+  "timezone": "Europe/Zurich"
+}
