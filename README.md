@@ -95,7 +95,7 @@ Error: The following LFS-tracked files exceed the size limit:
 
 ## Requirements
 
-- Python 3.9 or higher
+- Python 3.9+ (tested on Python 3.9-3.14)
 - Git with LFS installed and configured
 - Files tracked by Git LFS (via `.gitattributes`)
 
